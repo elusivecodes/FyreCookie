@@ -15,7 +15,7 @@
 **Using Composer**
 
 ```
-composer install fyre/cookie
+composer require fyre/cookie
 ```
 
 In PHP:
