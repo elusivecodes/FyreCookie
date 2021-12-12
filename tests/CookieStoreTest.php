@@ -11,7 +11,7 @@ use
 final class CookieStoreTest extends TestCase
 {
 
-    public function testCookieStoreDelete(): void
+    public function testDelete(): void
     {
         CookieStore::delete('test');
 
@@ -21,7 +21,7 @@ final class CookieStoreTest extends TestCase
         );
     }
 
-    public function testCookieStoreGet(): void
+    public function testGet(): void
     {
         CookieStore::set('test', 'value');
 
@@ -31,7 +31,7 @@ final class CookieStoreTest extends TestCase
         );
     }
 
-    public function testCookieStoreGetInvalid(): void
+    public function testGetInvalid(): void
     {
         $this->assertEquals(
             null,
@@ -39,7 +39,7 @@ final class CookieStoreTest extends TestCase
         );
     }
 
-    public function testCookieStoreHas(): void
+    public function testHas(): void
     {
         CookieStore::set('test', 'value');
 
@@ -49,7 +49,7 @@ final class CookieStoreTest extends TestCase
         );
     }
 
-    public function testCookieStoreHasInvalid(): void
+    public function testHasInvalid(): void
     {
         $this->assertEquals(
             false,

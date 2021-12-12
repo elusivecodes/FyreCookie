@@ -13,7 +13,7 @@ use function
 final class CookieTest extends TestCase
 {
 
-    public function testCookieGetDomain(): void
+    public function testGetDomain(): void
     {
         $cookie = new Cookie('test', 'value', [
             'domain' => 'test.com'
@@ -25,7 +25,7 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testCookieGetDomainDefault(): void
+    public function testGetDomainDefault(): void
     {
         $cookie = new Cookie('test', 'value');
 
@@ -35,7 +35,7 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testCookieGetExpires(): void
+    public function testGetExpires(): void
     {
         $expires = time() + 3600;
 
@@ -49,7 +49,7 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testCookieGetExpiresDefault(): void
+    public function testGetExpiresDefault(): void
     {
         $cookie = new Cookie('test', 'value');
 
@@ -59,7 +59,7 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testCookieGetName(): void
+    public function testGetName(): void
     {
         $cookie = new Cookie('test', 'value');
 
@@ -69,7 +69,7 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testCookieGetPath(): void
+    public function testGetPath(): void
     {
         $cookie = new Cookie('test', 'value', [
             'path' => '/test'
@@ -81,7 +81,7 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testCookieGetPathDefault(): void
+    public function testGetPathDefault(): void
     {
         $cookie = new Cookie('test', 'value');
 
@@ -91,7 +91,7 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testCookieGetSameSite(): void
+    public function testGetSameSite(): void
     {
         $cookie = new Cookie('test', 'value', [
             'sameSite' => 'Strict'
@@ -103,7 +103,7 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testCookieGetSameSiteDefault(): void
+    public function testGetSameSiteDefault(): void
     {
         $cookie = new Cookie('test', 'value');
 
@@ -113,7 +113,7 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testCookieGetValue(): void
+    public function testGetValue(): void
     {
         $cookie = new Cookie('test', 'value');
 
@@ -123,7 +123,7 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testCookieIsExpired(): void
+    public function testIsExpired(): void
     {
         $cookie = new Cookie('test', 'value', [
             'expires' => time() + 3600
@@ -135,7 +135,7 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testCookieIsExpiredExpired(): void
+    public function testIsExpiredExpired(): void
     {
         $cookie = new Cookie('test', 'value', [
             'expires' => time() - 3600
@@ -147,7 +147,7 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testCookieIsHttpOnly(): void
+    public function testIsHttpOnly(): void
     {
         $cookie = new Cookie('test', 'value', [
             'httpOnly' => true
@@ -159,7 +159,7 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testCookieIsHttpOnlyDefault(): void
+    public function testIsHttpOnlyDefault(): void
     {
         $cookie = new Cookie('test', 'value');
 
@@ -169,7 +169,7 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testCookieIsSecure(): void
+    public function testIsSecure(): void
     {
         $cookie = new Cookie('test', 'value', [
             'secure' => true
@@ -181,7 +181,7 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testCookieIsSecureDefault(): void
+    public function testIsSecureDefault(): void
     {
         $cookie = new Cookie('test', 'value');
 
