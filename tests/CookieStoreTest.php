@@ -57,7 +57,7 @@ final class CookieStoreTest extends TestCase
         );
     }
 
-    public function tearDown(): void
+    protected function tearDown(): void
     {
         CookieStore::clear();
     }
