@@ -19,7 +19,7 @@ final class CookieTest extends TestCase
             'domain' => 'test.com'
         ]);
 
-        $this->assertEquals(
+        $this->assertSame(
             'test.com',
             $cookie->getDomain()
         );
@@ -29,7 +29,7 @@ final class CookieTest extends TestCase
     {
         $cookie = new Cookie('test', 'value');
 
-        $this->assertEquals(
+        $this->assertSame(
             '',
             $cookie->getDomain()
         );
@@ -43,7 +43,7 @@ final class CookieTest extends TestCase
             'expires' => $expires
         ]);
 
-        $this->assertEquals(
+        $this->assertSame(
             $expires,
             $cookie->getExpires()
         );
@@ -53,7 +53,7 @@ final class CookieTest extends TestCase
     {
         $cookie = new Cookie('test', 'value');
 
-        $this->assertEquals(
+        $this->assertSame(
             0,
             $cookie->getExpires()
         );
@@ -63,7 +63,7 @@ final class CookieTest extends TestCase
     {
         $cookie = new Cookie('test', 'value');
 
-        $this->assertEquals(
+        $this->assertSame(
             'test',
             $cookie->getName()
         );
@@ -75,7 +75,7 @@ final class CookieTest extends TestCase
             'path' => '/test'
         ]);
 
-        $this->assertEquals(
+        $this->assertSame(
             '/test',
             $cookie->getPath()
         );
@@ -85,7 +85,7 @@ final class CookieTest extends TestCase
     {
         $cookie = new Cookie('test', 'value');
 
-        $this->assertEquals(
+        $this->assertSame(
             '/',
             $cookie->getPath()
         );
@@ -97,7 +97,7 @@ final class CookieTest extends TestCase
             'sameSite' => 'Strict'
         ]);
 
-        $this->assertEquals(
+        $this->assertSame(
             'Strict',
             $cookie->getSameSite()
         );
@@ -107,7 +107,7 @@ final class CookieTest extends TestCase
     {
         $cookie = new Cookie('test', 'value');
 
-        $this->assertEquals(
+        $this->assertSame(
             'Lax',
             $cookie->getSameSite()
         );
@@ -117,7 +117,7 @@ final class CookieTest extends TestCase
     {
         $cookie = new Cookie('test', 'value');
 
-        $this->assertEquals(
+        $this->assertSame(
             'value',
             $cookie->getValue()
         );
@@ -129,8 +129,7 @@ final class CookieTest extends TestCase
             'expires' => time() + 3600
         ]);
 
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $cookie->isExpired()
         );
     }
@@ -141,8 +140,7 @@ final class CookieTest extends TestCase
             'expires' => time() - 3600
         ]);
 
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $cookie->isExpired()
         );
     }
@@ -153,8 +151,7 @@ final class CookieTest extends TestCase
             'httpOnly' => true
         ]);
 
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $cookie->isHttpOnly()
         );
     }
@@ -163,8 +160,7 @@ final class CookieTest extends TestCase
     {
         $cookie = new Cookie('test', 'value');
 
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $cookie->isHttpOnly()
         );
     }
@@ -175,8 +171,7 @@ final class CookieTest extends TestCase
             'secure' => true
         ]);
 
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             $cookie->isSecure()
         );
     }
@@ -185,8 +180,7 @@ final class CookieTest extends TestCase
     {
         $cookie = new Cookie('test', 'value');
 
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             $cookie->isSecure()
         );
     }

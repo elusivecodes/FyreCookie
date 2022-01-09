@@ -15,8 +15,7 @@ final class CookieStoreTest extends TestCase
     {
         CookieStore::delete('test');
 
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             CookieStore::get('test')->isExpired()
         );
     }
@@ -33,8 +32,7 @@ final class CookieStoreTest extends TestCase
 
     public function testGetInvalid(): void
     {
-        $this->assertEquals(
-            null,
+        $this->assertNull(
             CookieStore::get('invalid')
         );
     }
@@ -43,16 +41,14 @@ final class CookieStoreTest extends TestCase
     {
         CookieStore::set('test', 'value');
 
-        $this->assertEquals(
-            true,
+        $this->assertTrue(
             CookieStore::has('test')
         );
     }
 
     public function testHasInvalid(): void
     {
-        $this->assertEquals(
-            false,
+        $this->assertFalse(
             CookieStore::has('invalid')
         );
     }
