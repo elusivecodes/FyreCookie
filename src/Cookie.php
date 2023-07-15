@@ -3,11 +3,9 @@ declare(strict_types=1);
 
 namespace Fyre\Cookie;
 
-use function
-    array_merge,
-    implode,
-    setcookie,
-    time;
+use function array_replace;
+use function setcookie;
+use function time;
 
 /**
  * Cookie
@@ -16,7 +14,7 @@ class Cookie
 {
 
     protected static array $defaults = [
-        'expires' => 0,
+        'expires' => null,
         'path' => '/',
         'domain' => '',
         'secure' => false,
@@ -27,13 +25,11 @@ class Cookie
     protected string $name;
     protected string $value;
 
-    protected int $expires;
+    protected int|null $expires;
     protected string $path;
     protected string $domain;
-
     protected bool $secure;
     protected bool $httpOnly;
-
     protected string $sameSite;
 
     /**
@@ -42,7 +38,7 @@ class Cookie
      */
     public static function setDefaults($options = []): void
     {
-        static::$defaults = array_merge(static::$defaults, $options);
+        static::$defaults = array_replace(static::$defaults, $options);
     }
 
     /**
@@ -53,7 +49,7 @@ class Cookie
      */
     public function __construct(string $name, string $value = '', array $options = [])
     {
-        $options = array_merge(static::$defaults, $options);
+        $options = array_replace(static::$defaults, $options);
 
         $this->name = $name;
         $this->value = $value;
@@ -61,10 +57,8 @@ class Cookie
         $this->expires = $options['expires'];
         $this->path = $options['path'];
         $this->domain = $options['domain'];
-
         $this->secure = $options['secure'];
         $this->httpOnly = $options['httpOnly'];
-
         $this->sameSite = $options['sameSite'];
     }
 
@@ -75,7 +69,7 @@ class Cookie
     public function dispatch(): bool
     {
         return setcookie($this->name, $this->value, [
-            'expires' => $this->expires,
+            'expires' => $this->expires ?? 0,
             'path' => $this->path,
             'domain' => $this->domain,
             'secure' => $this->secure,
@@ -95,20 +89,11 @@ class Cookie
 
     /**
      * Get the cookie expires timestamp.
-     * @return int The cookie expires timestamp.
+     * @return int|null The cookie expires timestamp.
      */
-    public function getExpires(): int
+    public function getExpires(): int|null
     {
         return $this->expires;
-    }
-
-    /**
-     * Get the cookie ID.
-     * @return string The cookie ID.
-     */
-    public function getId(): string
-    {
-        return implode(';', [$this->name, $this->path, $this->domain]);
     }
 
     /**
@@ -153,7 +138,7 @@ class Cookie
      */
     public function isExpired(): bool
     {
-        return !$this->expires || $this->expires < time();
+        return $this->expires !== null && $this->expires < time();
     }
 
     /**

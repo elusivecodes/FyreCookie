@@ -3,13 +3,36 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use
-    Fyre\Cookie\Cookie,
-    Fyre\Cookie\CookieStore,
-    PHPUnit\Framework\TestCase;
+use Fyre\Cookie\Cookie;
+use Fyre\Cookie\CookieStore;
+use PHPUnit\Framework\TestCase;
 
 final class CookieStoreTest extends TestCase
 {
+
+    public function testAll(): void
+    {
+        CookieStore::set('test1', 'value');
+        CookieStore::set('test2', 'value');
+
+        $cookies = CookieStore::all();
+
+        $this->assertIsArray($cookies);
+        $this->assertCount(2, $cookies);
+        $this->assertSame(CookieStore::get('test1'), $cookies[0]);
+        $this->assertSame(CookieStore::get('test2'), $cookies[1]);
+    }
+
+    public function testCount(): void
+    {
+        CookieStore::set('test1', 'value');
+        CookieStore::set('test2', 'value');
+
+        $this->assertSame(
+            2,
+            CookieStore::count()
+        );
+    }
 
     public function testDelete(): void
     {

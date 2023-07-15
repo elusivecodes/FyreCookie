@@ -21,11 +21,20 @@ composer require fyre/cookie
 In PHP:
 
 ```php
+use Fyre\Cookie\Cookie;
 use Fyre\Cookie\CookieStore;
 ```
 
 
 ## Methods
+
+**All**
+
+Get all the cookies.
+
+```php
+$cookies = CookieStore::all();
+```
 
 **Clear**
 
@@ -33,6 +42,14 @@ Clear all cookies.
 
 ```php
 CookieStore::clear();
+```
+
+**Count**
+
+Get the number of cookies.
+
+```php
+$cookieCount = CookieStore::count();
 ```
 
 **Delete**
@@ -66,7 +83,7 @@ Get a cookie.
 - `$name` is a string representing the cookie name.
 
 ```php
-CookieStore::get($name);
+$cookie = CookieStore::get($name);
 ```
 
 **Has**
@@ -76,7 +93,7 @@ Determine if a cookie exists.
 - `$name` is a string representing the cookie name.
 
 ```php
-$has = CookieStore::has($name);
+$hasCookie = CookieStore::has($name);
 ```
 
 **Set**
@@ -86,7 +103,7 @@ Set a cookie.
 - `$name` is a string representing the cookie name.
 - `$value` is a string representing the cookie value.
 - `$options` is an array containing cookie options.
-    - `expires` is a number representing the cookie lifetime, and will default to *0*.
+    - `expires` is a number representing the cookie lifetime, and will default to *null*.
     - `domain` is a string representing the cookie domain, and will default to "".
     - `path` is a string representing the cookie path, and will default to "*/*".
     - `secure` is a boolean indicating whether to set a secure cookie, and will default to *false*.

@@ -3,12 +3,10 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use
-    Fyre\Cookie\Cookie,
-    PHPUnit\Framework\TestCase;
+use Fyre\Cookie\Cookie;
+use PHPUnit\Framework\TestCase;
 
-use function
-    time;
+use function time;
 
 final class CookieTest extends TestCase
 {
@@ -54,7 +52,7 @@ final class CookieTest extends TestCase
         $cookie = new Cookie('test', 'value');
 
         $this->assertSame(
-            0,
+            null,
             $cookie->getExpires()
         );
     }
@@ -141,6 +139,17 @@ final class CookieTest extends TestCase
         ]);
 
         $this->assertTrue(
+            $cookie->isExpired()
+        );
+    }
+
+    public function testIsExpiredNull(): void
+    {
+        $cookie = new Cookie('test', 'value', [
+            'expires' => null
+        ]);
+
+        $this->assertFalse(
             $cookie->isExpired()
         );
     }

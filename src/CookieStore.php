@@ -3,6 +3,10 @@ declare(strict_types=1);
 
 namespace Fyre\Cookie;
 
+use function array_values;
+use function count;
+use function implode;
+
 /**
  * CookieStore
  */
@@ -10,6 +14,15 @@ abstract class CookieStore
 {
 
     protected static array $cookies = [];
+
+    /**
+     * Get all the cookies.
+     * @return array
+     */
+    public static function all(): array
+    {
+        return array_values(static::$cookies);
+    }
 
     /**
      * Clear all cookies.
@@ -20,13 +33,22 @@ abstract class CookieStore
     }
 
     /**
+     * Get the number of cookies.
+     * @return int The number of cookies.
+     */
+    public static function count(): int
+    {
+        return count(static::$cookies);
+    }
+
+    /**
      * Delete a cookie.
      * @param string $name The cookie name.
      * @param array $options Options for the cookie.
      */
     public static function delete(string $name, array $options = []): void
     {
-        static::set($name, '', $options + ['expire' => 0]);
+        static::set($name, '', $options + ['expires' => 1]);
     }
 
     /**
@@ -77,7 +99,7 @@ abstract class CookieStore
     {
         $cookie = new Cookie($name, $value, $options);
 
-        $id = $cookie->getId();
+        $id = implode(';', [$cookie->getName(), $cookie->getPath(), $cookie->getDomain()]);
 
         static::$cookies[$id] = $cookie;
     }
