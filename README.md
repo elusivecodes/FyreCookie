@@ -1,6 +1,6 @@
 # FyreCookie
 
-**FyreCookie** is a free, cookie library for *PHP*.
+**FyreCookie** is a free, open-source cookie library for *PHP*.
 
 
 ## Table Of Contents
