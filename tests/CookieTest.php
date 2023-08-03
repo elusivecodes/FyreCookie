@@ -3,13 +3,28 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Fyre\Cookie\Cookie;
+use Fyre\Http\Cookie;
 use PHPUnit\Framework\TestCase;
 
 use function time;
 
 final class CookieTest extends TestCase
 {
+
+    public function testGetDefaults(): void
+    {
+        $this->assertSame(
+            [
+                'expires' => null,
+                'path' => '/',
+                'domain' => '',
+                'secure' => false,
+                'httpOnly' => false,
+                'sameSite' => 'Lax'
+            ],
+            Cookie::getDefaults()
+        );
+    }
 
     public function testGetDomain(): void
     {

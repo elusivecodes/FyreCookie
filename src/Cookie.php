@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Fyre\Cookie;
+namespace Fyre\Http;
 
 use function array_replace;
+use function implode;
 use function setcookie;
 use function time;
 
@@ -31,6 +32,15 @@ class Cookie
     protected bool $secure;
     protected bool $httpOnly;
     protected string $sameSite;
+
+    /**
+     * Get the cookie default options.
+     * @return array The default options.
+     */
+    public static function getDefaults(): array
+    {
+        return static::$defaults;
+    }
 
     /**
      * Set cookie default options.
@@ -94,6 +104,15 @@ class Cookie
     public function getExpires(): int|null
     {
         return $this->expires;
+    }
+
+    /**
+     * Get the cookie ID.
+     * @return string The cookie ID.
+     */
+    public function getId(): string
+    {
+        return implode(';', [$this->name, $this->path, $this->domain]);
     }
 
     /**

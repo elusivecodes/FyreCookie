@@ -5,8 +5,9 @@
 
 ## Table Of Contents
 - [Installation](#installation)
+- [Cookie Creation](#cookie-creation)
 - [Methods](#methods)
-- [Cookies](#cookies)
+- [Static Methods](#static-methods)
 
 
 
@@ -21,84 +22,11 @@ composer require fyre/cookie
 In PHP:
 
 ```php
-use Fyre\Cookie\Cookie;
-use Fyre\Cookie\CookieStore;
+use Fyre\Http\Cookie;
 ```
 
 
-## Methods
-
-**All**
-
-Get all the cookies.
-
-```php
-$cookies = CookieStore::all();
-```
-
-**Clear**
-
-Clear all cookies.
-
-```php
-CookieStore::clear();
-```
-
-**Count**
-
-Get the number of cookies.
-
-```php
-$cookieCount = CookieStore::count();
-```
-
-**Delete**
-
-Delete a cookie.
-
-- `$name` is a string representing the cookie name.
-- `$options` is an array containing cookie options.
-    - `domain` is a string representing the cookie domain, and will default to "".
-    - `path` is a string representing the cookie path, and will default to "*/*".
-    - `secure` is a boolean indicating whether to set a secure cookie, and will default to *false*.
-    - `httpOnly` is a boolean indicating whether to the cookie should be HTTP only, and will default to *false*.
-    - `sameSite` is a string representing the cookie same site, and will default to "*Lax*".
-
-```php
-CookieStore::delete($name, $options);
-```
-
-**Dispatch**
-
-Dispatch all cookies.
-
-```php
-CookieStore::dispatch();
-```
-
-**Get**
-
-Get a cookie.
-
-- `$name` is a string representing the cookie name.
-
-```php
-$cookie = CookieStore::get($name);
-```
-
-**Has**
-
-Determine if a cookie exists.
-
-- `$name` is a string representing the cookie name.
-
-```php
-$hasCookie = CookieStore::has($name);
-```
-
-**Set**
-
-Set a cookie.
+## Cookie Creation
 
 - `$name` is a string representing the cookie name.
 - `$value` is a string representing the cookie value.
@@ -111,21 +39,11 @@ Set a cookie.
     - `sameSite` is a string representing the cookie same site, and will default to "*Lax*".
 
 ```php
-CookieStore::set($name, $value, $options);
+$cookie = new Cookie($name, $value, $options);
 ```
 
 
-## Cookies
-
-**Set Defaults**
-
-Set cookie default options.
-
-- `$options` is an array containing cookie options.
-
-```php
-Cookie::setDefaults($options);
-```
+## Methods
 
 **Dispatch**
 
@@ -205,4 +123,25 @@ Determine if the cookie is secure.
 
 ```php
 $secure = $cookie->isSecure();
+```
+
+
+## Static Methods
+
+**Get Defaults**
+
+Get the cookie default options.
+
+```php
+$options = Cookie::getDefaults();
+```
+
+**Set Defaults**
+
+Set cookie default options.
+
+- `$options` is an array containing cookie options.
+
+```php
+Cookie::setDefaults($options);
 ```
