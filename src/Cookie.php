@@ -13,7 +13,6 @@ use function time;
  */
 class Cookie
 {
-
     protected static array $defaults = [
         'expires' => null,
         'path' => '/',
@@ -22,34 +21,14 @@ class Cookie
         'httpOnly' => false,
         'sameSite' => 'Lax'
     ];
-
-    protected string $name;
-    protected string $value;
-
-    protected int|null $expires;
-    protected string $path;
     protected string $domain;
-    protected bool $secure;
+    protected int|null $expires;
     protected bool $httpOnly;
+    protected string $name;
+    protected string $path;
     protected string $sameSite;
-
-    /**
-     * Get the cookie default options.
-     * @return array The default options.
-     */
-    public static function getDefaults(): array
-    {
-        return static::$defaults;
-    }
-
-    /**
-     * Set cookie default options.
-     * @param array $options The default options.
-     */
-    public static function setDefaults($options = []): void
-    {
-        static::$defaults = array_replace(static::$defaults, $options);
-    }
+    protected bool $secure;
+    protected string $value;
 
     /**
      * New Cookie constructor.
@@ -86,6 +65,15 @@ class Cookie
             'httponly' => $this->httpOnly,
             'sameSite' => $this->sameSite
         ]);
+    }
+
+    /**
+     * Get the cookie default options.
+     * @return array The default options.
+     */
+    public static function getDefaults(): array
+    {
+        return static::$defaults;
     }
 
     /**
@@ -178,4 +166,12 @@ class Cookie
         return $this->secure;
     }
 
+    /**
+     * Set cookie default options.
+     * @param array $options The default options.
+     */
+    public static function setDefaults($options = []): void
+    {
+        static::$defaults = array_replace(static::$defaults, $options);
+    }
 }

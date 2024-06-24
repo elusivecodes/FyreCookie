@@ -10,7 +10,6 @@ use function time;
 
 final class CookieTest extends TestCase
 {
-
     public function testGetDefaults(): void
     {
         $this->assertSame(
@@ -208,5 +207,4 @@ final class CookieTest extends TestCase
             $cookie->isSecure()
         );
     }
-
 }
