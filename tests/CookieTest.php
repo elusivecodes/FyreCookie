@@ -19,7 +19,7 @@ final class CookieTest extends TestCase
                 'domain' => '',
                 'secure' => false,
                 'httpOnly' => false,
-                'sameSite' => 'Lax'
+                'sameSite' => 'Lax',
             ],
             Cookie::getDefaults()
         );
@@ -28,7 +28,7 @@ final class CookieTest extends TestCase
     public function testGetDomain(): void
     {
         $cookie = new Cookie('test', 'value', [
-            'domain' => 'test.com'
+            'domain' => 'test.com',
         ]);
 
         $this->assertSame(
@@ -52,7 +52,7 @@ final class CookieTest extends TestCase
         $expires = time() + 3600;
 
         $cookie = new Cookie('test', 'value', [
-            'expires' => $expires
+            'expires' => $expires,
         ]);
 
         $this->assertSame(
@@ -84,7 +84,7 @@ final class CookieTest extends TestCase
     public function testGetPath(): void
     {
         $cookie = new Cookie('test', 'value', [
-            'path' => '/test'
+            'path' => '/test',
         ]);
 
         $this->assertSame(
@@ -106,7 +106,7 @@ final class CookieTest extends TestCase
     public function testGetSameSite(): void
     {
         $cookie = new Cookie('test', 'value', [
-            'sameSite' => 'Strict'
+            'sameSite' => 'Strict',
         ]);
 
         $this->assertSame(
@@ -138,7 +138,7 @@ final class CookieTest extends TestCase
     public function testIsExpired(): void
     {
         $cookie = new Cookie('test', 'value', [
-            'expires' => time() + 3600
+            'expires' => time() + 3600,
         ]);
 
         $this->assertFalse(
@@ -149,7 +149,7 @@ final class CookieTest extends TestCase
     public function testIsExpiredExpired(): void
     {
         $cookie = new Cookie('test', 'value', [
-            'expires' => time() - 3600
+            'expires' => time() - 3600,
         ]);
 
         $this->assertTrue(
@@ -160,7 +160,7 @@ final class CookieTest extends TestCase
     public function testIsExpiredNull(): void
     {
         $cookie = new Cookie('test', 'value', [
-            'expires' => null
+            'expires' => null,
         ]);
 
         $this->assertFalse(
@@ -171,7 +171,7 @@ final class CookieTest extends TestCase
     public function testIsHttpOnly(): void
     {
         $cookie = new Cookie('test', 'value', [
-            'httpOnly' => true
+            'httpOnly' => true,
         ]);
 
         $this->assertTrue(
@@ -191,7 +191,7 @@ final class CookieTest extends TestCase
     public function testIsSecure(): void
     {
         $cookie = new Cookie('test', 'value', [
-            'secure' => true
+            'secure' => true,
         ]);
 
         $this->assertTrue(

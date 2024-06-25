@@ -19,19 +19,48 @@ class Cookie
         'domain' => '',
         'secure' => false,
         'httpOnly' => false,
-        'sameSite' => 'Lax'
+        'sameSite' => 'Lax',
     ];
+
     protected string $domain;
+
     protected int|null $expires;
+
     protected bool $httpOnly;
+
     protected string $name;
+
     protected string $path;
+
     protected string $sameSite;
+
     protected bool $secure;
+
     protected string $value;
 
     /**
+     * Get the cookie default options.
+     *
+     * @return array The default options.
+     */
+    public static function getDefaults(): array
+    {
+        return static::$defaults;
+    }
+
+    /**
+     * Set cookie default options.
+     *
+     * @param array $options The default options.
+     */
+    public static function setDefaults($options = []): void
+    {
+        static::$defaults = array_replace(static::$defaults, $options);
+    }
+
+    /**
      * New Cookie constructor.
+     *
      * @param string $name The cookie name.
      * @param string $value The cookie value.
      * @param array $options Options for the cookie.
@@ -53,6 +82,7 @@ class Cookie
 
     /**
      * Dispatch the cookie.
+     *
      * @return bool TRUE if the cookie was dispatched, otherwise FALSE.
      */
     public function dispatch(): bool
@@ -63,21 +93,13 @@ class Cookie
             'domain' => $this->domain,
             'secure' => $this->secure,
             'httponly' => $this->httpOnly,
-            'sameSite' => $this->sameSite
+            'sameSite' => $this->sameSite,
         ]);
     }
 
     /**
-     * Get the cookie default options.
-     * @return array The default options.
-     */
-    public static function getDefaults(): array
-    {
-        return static::$defaults;
-    }
-
-    /**
      * Get the cookie domain.
+     *
      * @return string The cookie domain.
      */
     public function getDomain(): string
@@ -87,6 +109,7 @@ class Cookie
 
     /**
      * Get the cookie expires timestamp.
+     *
      * @return int|null The cookie expires timestamp.
      */
     public function getExpires(): int|null
@@ -96,6 +119,7 @@ class Cookie
 
     /**
      * Get the cookie ID.
+     *
      * @return string The cookie ID.
      */
     public function getId(): string
@@ -105,6 +129,7 @@ class Cookie
 
     /**
      * Get the cookie name.
+     *
      * @return string The cookie name.
      */
     public function getName(): string
@@ -114,6 +139,7 @@ class Cookie
 
     /**
      * Get the cookie path.
+     *
      * @return string The cookie path.
      */
     public function getPath(): string
@@ -123,6 +149,7 @@ class Cookie
 
     /**
      * Get the cookie same site attribute.
+     *
      * @return string The cookie same site attribute.
      */
     public function getSameSite(): string
@@ -132,6 +159,7 @@ class Cookie
 
     /**
      * Get the cookie value.
+     *
      * @return string The cookie value.
      */
     public function getValue(): string
@@ -141,6 +169,7 @@ class Cookie
 
     /**
      * Determine if the cookie has expired.
+     *
      * @return bool TRUE if the cookie has expired, otherwise FALSE.
      */
     public function isExpired(): bool
@@ -150,6 +179,7 @@ class Cookie
 
     /**
      * Determine if the cookie is HTTP only.
+     *
      * @return bool TRUE if the cookie is HTTP only, otherwise FALSE.
      */
     public function isHttpOnly(): bool
@@ -159,19 +189,11 @@ class Cookie
 
     /**
      * Determine if the cookie is secure.
+     *
      * @return bool TRUE if the cookie is secure, otherwise FALSE.
      */
     public function isSecure(): bool
     {
         return $this->secure;
-    }
-
-    /**
-     * Set cookie default options.
-     * @param array $options The default options.
-     */
-    public static function setDefaults($options = []): void
-    {
-        static::$defaults = array_replace(static::$defaults, $options);
     }
 }
