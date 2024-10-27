@@ -3,9 +3,14 @@ declare(strict_types=1);
 
 namespace Fyre\Http;
 
+use InvalidArgumentException;
+
+use function array_map;
 use function array_replace;
-use function implode;
-use function setcookie;
+use function gmdate;
+use function in_array;
+use function rawurlencode;
+use function strtolower;
 use function time;
 
 /**
@@ -13,13 +18,15 @@ use function time;
  */
 class Cookie
 {
+    protected const RESERVED_CHARS = ['=', ',', ';', ' ', "\t", "\r", "\n", "\v", "\f"];
+
     protected static array $defaults = [
         'expires' => null,
         'path' => '/',
         'domain' => '',
         'secure' => false,
         'httpOnly' => false,
-        'sameSite' => 'Lax',
+        'sameSite' => 'lax',
     ];
 
     protected string $domain;
@@ -37,26 +44,6 @@ class Cookie
     protected bool $secure;
 
     protected string $value;
-
-    /**
-     * Get the cookie default options.
-     *
-     * @return array The default options.
-     */
-    public static function getDefaults(): array
-    {
-        return static::$defaults;
-    }
-
-    /**
-     * Set cookie default options.
-     *
-     * @param array $options The default options.
-     */
-    public static function setDefaults($options = []): void
-    {
-        static::$defaults = array_replace(static::$defaults, $options);
-    }
 
     /**
      * New Cookie constructor.
@@ -78,23 +65,55 @@ class Cookie
         $this->secure = $options['secure'];
         $this->httpOnly = $options['httpOnly'];
         $this->sameSite = $options['sameSite'];
+
+        if ($this->sameSite) {
+            $this->sameSite = strtolower($this->sameSite);
+
+            if (!in_array($this->sameSite, ['lax', 'strict', 'none'])) {
+                throw new InvalidArgumentException('Invalid sameSite option.');
+            }
+        }
     }
 
     /**
-     * Dispatch the cookie.
+     * Get the cookie string.
      *
-     * @return bool TRUE if the cookie was dispatched, otherwise FALSE.
+     * @return string The cookie string.
      */
-    public function dispatch(): bool
+    public function __toString(): string
     {
-        return setcookie($this->name, $this->value, [
-            'expires' => $this->expires ?? 0,
-            'path' => $this->path,
-            'domain' => $this->domain,
-            'secure' => $this->secure,
-            'httponly' => $this->httpOnly,
-            'sameSite' => $this->sameSite,
-        ]);
+        $result = '';
+
+        $replacements = array_map(fn(string $char): string => rawurlencode($char), static::RESERVED_CHARS);
+        $result = str_replace(static::RESERVED_CHARS, $replacements, $this->name);
+        $result .= '=';
+        $result .= rawurlencode($this->value);
+
+        if ($this->expires !== null) {
+            $result .= '; expires='.gmdate('D, d M Y H:i:s T', $this->expires);
+        }
+
+        if ($this->path) {
+            $result .= '; path='.$this->path;
+        }
+
+        if ($this->domain) {
+            $result .= '; domain='.$this->domain;
+        }
+
+        if ($this->secure) {
+            $result .= '; secure';
+        }
+
+        if ($this->httpOnly) {
+            $result .= '; httponly';
+        }
+
+        if ($this->sameSite) {
+            $result .= '; samesite='.$this->sameSite;
+        }
+
+        return $result;
     }
 
     /**
@@ -118,13 +137,13 @@ class Cookie
     }
 
     /**
-     * Get the cookie ID.
+     * Get the cookie header string.
      *
-     * @return string The cookie ID.
+     * @return string The cookie header string.
      */
-    public function getId(): string
+    public function getHeaderString(): string
     {
-        return implode(';', [$this->name, $this->path, $this->domain]);
+        return 'Set-Cookie: '.$this->__toString();
     }
 
     /**

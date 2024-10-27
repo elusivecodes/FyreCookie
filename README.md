@@ -6,8 +6,7 @@
 ## Table Of Contents
 - [Installation](#installation)
 - [Cookie Creation](#cookie-creation)
-- [Methods](#methods)
-- [Static Methods](#static-methods)
+- [Cookie Methods](#cookie-methods)
 
 
 
@@ -43,15 +42,7 @@ $cookie = new Cookie($name, $value, $options);
 ```
 
 
-## Methods
-
-**Dispatch**
-
-Dispatch the cookie.
-
-```php
-$cookie->dispatch();
-```
+## Cookie Methods
 
 **Get Domain**
 
@@ -67,6 +58,12 @@ Get the cookie expires timestamp.
 
 ```php
 $expires = $cookie->getExpires();
+```
+
+**Get Header String**
+
+```php
+$headerString = $cookie->getHeaderString();
 ```
 
 **Get Name**
@@ -123,25 +120,4 @@ Determine if the cookie is secure.
 
 ```php
 $secure = $cookie->isSecure();
-```
-
-
-## Static Methods
-
-**Get Defaults**
-
-Get the cookie default options.
-
-```php
-$options = Cookie::getDefaults();
-```
-
-**Set Defaults**
-
-Set cookie default options.
-
-- `$options` is an array containing cookie options.
-
-```php
-Cookie::setDefaults($options);
 ```

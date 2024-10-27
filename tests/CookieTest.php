@@ -10,21 +10,6 @@ use function time;
 
 final class CookieTest extends TestCase
 {
-    public function testGetDefaults(): void
-    {
-        $this->assertSame(
-            [
-                'expires' => null,
-                'path' => '/',
-                'domain' => '',
-                'secure' => false,
-                'httpOnly' => false,
-                'sameSite' => 'Lax',
-            ],
-            Cookie::getDefaults()
-        );
-    }
-
     public function testGetDomain(): void
     {
         $cookie = new Cookie('test', 'value', [
@@ -71,6 +56,23 @@ final class CookieTest extends TestCase
         );
     }
 
+    public function testGetHeaderString(): void
+    {
+        $cookie = new Cookie('test', 'value', [
+            'expires' => 9999999999,
+            'path' => '/test',
+            'domain' => 'test.com',
+            'secure' => true,
+            'httpOnly' => true,
+            'sameSite' => 'strict',
+        ]);
+
+        $this->assertSame(
+            'Set-Cookie: test=value; expires=Sat, 20 Nov 2286 17:46:39 GMT; path=/test; domain=test.com; secure; httponly; samesite=strict',
+            $cookie->getHeaderString()
+        );
+    }
+
     public function testGetName(): void
     {
         $cookie = new Cookie('test', 'value');
@@ -106,11 +108,11 @@ final class CookieTest extends TestCase
     public function testGetSameSite(): void
     {
         $cookie = new Cookie('test', 'value', [
-            'sameSite' => 'Strict',
+            'sameSite' => 'strict',
         ]);
 
         $this->assertSame(
-            'Strict',
+            'strict',
             $cookie->getSameSite()
         );
     }
@@ -120,7 +122,7 @@ final class CookieTest extends TestCase
         $cookie = new Cookie('test', 'value');
 
         $this->assertSame(
-            'Lax',
+            'lax',
             $cookie->getSameSite()
         );
     }
@@ -205,6 +207,43 @@ final class CookieTest extends TestCase
 
         $this->assertFalse(
             $cookie->isSecure()
+        );
+    }
+
+    public function testToString(): void
+    {
+        $cookie = new Cookie('test', 'value', [
+            'expires' => 9999999999,
+            'path' => '/test',
+            'domain' => 'test.com',
+            'secure' => true,
+            'httpOnly' => true,
+            'sameSite' => 'strict',
+        ]);
+
+        $this->assertSame(
+            'test=value; expires=Sat, 20 Nov 2286 17:46:39 GMT; path=/test; domain=test.com; secure; httponly; samesite=strict',
+            (string) $cookie
+        );
+    }
+
+    public function testToStringEncodedName(): void
+    {
+        $cookie = new Cookie('test=1', 'value');
+
+        $this->assertSame(
+            'test%3D1=value; path=/; samesite=lax',
+            (string) $cookie
+        );
+    }
+
+    public function testToStringEncodedValue(): void
+    {
+        $cookie = new Cookie('test', 'value=1');
+
+        $this->assertSame(
+            'test=value%3D1; path=/; samesite=lax',
+            (string) $cookie
         );
     }
 }
