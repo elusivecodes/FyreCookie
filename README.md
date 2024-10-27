@@ -100,7 +100,7 @@ $value = $cookie->getValue();
 
 **Is Expired**
 
-Determine if the cookie has expired.
+Determine whether the cookie has expired.
 
 ```php
 $expired = $cookie->isExpired();
@@ -108,7 +108,7 @@ $expired = $cookie->isExpired();
 
 **Is Http Only**
 
-Determine if the cookie is HTTP only.
+Determine whether the cookie is HTTP only.
 
 ```php
 $httpOnly = $cookie->isHttpOnly();
@@ -116,7 +116,7 @@ $httpOnly = $cookie->isHttpOnly();
 
 **Is Secure**
 
-Determine if the cookie is secure.
+Determine whether the cookie is secure.
 
 ```php
 $secure = $cookie->isSecure();

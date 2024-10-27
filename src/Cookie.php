@@ -187,7 +187,7 @@ class Cookie
     }
 
     /**
-     * Determine if the cookie has expired.
+     * Determine whether the cookie has expired.
      *
      * @return bool TRUE if the cookie has expired, otherwise FALSE.
      */
@@ -197,7 +197,7 @@ class Cookie
     }
 
     /**
-     * Determine if the cookie is HTTP only.
+     * Determine whether the cookie is HTTP only.
      *
      * @return bool TRUE if the cookie is HTTP only, otherwise FALSE.
      */
@@ -207,7 +207,7 @@ class Cookie
     }
 
     /**
-     * Determine if the cookie is secure.
+     * Determine whether the cookie is secure.
      *
      * @return bool TRUE if the cookie is secure, otherwise FALSE.
      */
