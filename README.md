@@ -5,8 +5,8 @@
 
 ## Table Of Contents
 - [Installation](#installation)
-- [Cookie Creation](#cookie-creation)
-- [Cookie Methods](#cookie-methods)
+- [Basic Usage](#basic-usage)
+- [Methods](#methods)
 
 
 
@@ -25,7 +25,7 @@ use Fyre\Http\Cookie;
 ```
 
 
-## Cookie Creation
+## Basic Usage
 
 - `$name` is a string representing the cookie name.
 - `$value` is a string representing the cookie value.
@@ -42,7 +42,7 @@ $cookie = new Cookie($name, $value, $options);
 ```
 
 
-## Cookie Methods
+## Methods
 
 **Get Domain**
 
