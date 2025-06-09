@@ -35,15 +35,11 @@ class Cookie
 
     protected bool $httpOnly;
 
-    protected string $name;
-
     protected string $path;
 
     protected string $sameSite;
 
     protected bool $secure;
-
-    protected string $value;
 
     /**
      * New Cookie constructor.
@@ -52,12 +48,12 @@ class Cookie
      * @param string $value The cookie value.
      * @param array $options Options for the cookie.
      */
-    public function __construct(string $name, string $value = '', array $options = [])
-    {
+    public function __construct(
+        protected string $name,
+        protected string $value = '',
+        array $options = []
+    ) {
         $options = array_replace(static::$defaults, $options);
-
-        $this->name = $name;
-        $this->value = $value;
 
         $this->expires = $options['expires'];
         $this->path = $options['path'];
