@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Fyre\Http;
 
+use Fyre\Utility\Traits\MacroTrait;
 use InvalidArgumentException;
 
 use function array_map;
@@ -18,6 +19,8 @@ use function time;
  */
 class Cookie
 {
+    use MacroTrait;
+
     protected const RESERVED_CHARS = ['=', ',', ';', ' ', "\t", "\r", "\n", "\v", "\f"];
 
     protected static array $defaults = [

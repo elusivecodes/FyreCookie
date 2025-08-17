@@ -4,8 +4,10 @@ declare(strict_types=1);
 namespace Tests;
 
 use Fyre\Http\Cookie;
+use Fyre\Utility\Traits\MacroTrait;
 use PHPUnit\Framework\TestCase;
 
+use function class_uses;
 use function time;
 
 final class CookieTest extends TestCase
@@ -207,6 +209,14 @@ final class CookieTest extends TestCase
 
         $this->assertFalse(
             $cookie->isSecure()
+        );
+    }
+
+    public function testMacroable(): void
+    {
+        $this->assertContains(
+            MacroTrait::class,
+            class_uses(Cookie::class)
         );
     }
 
