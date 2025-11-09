@@ -60,12 +60,6 @@ Get the cookie expires timestamp.
 $expires = $cookie->getExpires();
 ```
 
-**Get Header String**
-
-```php
-$headerString = $cookie->getHeaderString();
-```
-
 **Get Name**
 
 Get the cookie name.

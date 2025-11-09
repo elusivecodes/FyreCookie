@@ -58,23 +58,6 @@ final class CookieTest extends TestCase
         );
     }
 
-    public function testGetHeaderString(): void
-    {
-        $cookie = new Cookie('test', 'value', [
-            'expires' => 9999999999,
-            'path' => '/test',
-            'domain' => 'test.com',
-            'secure' => true,
-            'httpOnly' => true,
-            'sameSite' => 'strict',
-        ]);
-
-        $this->assertSame(
-            'Set-Cookie: test=value; expires=Sat, 20 Nov 2286 17:46:39 GMT; path=/test; domain=test.com; secure; httponly; samesite=strict',
-            $cookie->getHeaderString()
-        );
-    }
-
     public function testGetName(): void
     {
         $cookie = new Cookie('test', 'value');

@@ -136,16 +136,6 @@ class Cookie
     }
 
     /**
-     * Get the cookie header string.
-     *
-     * @return string The cookie header string.
-     */
-    public function getHeaderString(): string
-    {
-        return 'Set-Cookie: '.$this->__toString();
-    }
-
-    /**
      * Get the cookie name.
      *
      * @return string The cookie name.
